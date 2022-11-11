@@ -1,10 +1,10 @@
+import { addContact } from 'redux/operations';
 import { Formik, Form } from 'formik';
 import * as Yup from 'yup';
 import { useDispatch, useSelector } from 'react-redux';
 import { nanoid } from 'nanoid';
 import Notiflix from 'notiflix';
-import {getContacts} from '../../redux/selectors'
-import { addContact } from 'redux/contactsSlice';
+import { getContacts } from '../../redux/selectors';
 import { Label, Input, AddBtn } from '../ContactForm/ContactForm.styled';
 
 const validationSchema = Yup.object({
@@ -22,14 +22,13 @@ const ContactForm = () => {
   const contacts = useSelector(getContacts);
 
   const handleSubmit = ({ name, number }, { resetForm }) => {
-        
     const checkNameInList = contacts.some(
       contact => contact.name.toLowerCase() === name.toLowerCase()
     );
 
     if (checkNameInList) {
       Notiflix.Report.warning(`${name} is already in contacts`);
-      return resetForm();;
+      return resetForm();
     }
 
     const contact = { id: nanoid(4), name, number };
