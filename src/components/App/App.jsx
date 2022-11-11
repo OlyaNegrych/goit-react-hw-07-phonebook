@@ -24,6 +24,7 @@ const App = () => {
 
         <Section title="Contacts">
           <Filter />
+          <br/>
           {isLoading && !error && <b>Request in progress...</b>}
           <ContactList />
         </Section>
